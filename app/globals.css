@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: var(--font-display), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-brand-50: #f0f4f0;
+  --color-brand-100: #dde8dd;
+  --color-brand-500: #6c8f70;
+  --color-brand-600: #527154;
+  --color-brand-700: #3f5a42;
+  --color-severe-50: #f7f0f4;
+  --color-severe-100: #eedfea;
+  --color-severe-500: #96617f;
+  --color-severe-600: #7a4c66;
+  --color-severe-700: #5f3f52;
+}
+
+:root {
+  --background: #f7f6f2;
+  --foreground: #1c1917;
+}
+
+/*
+ * Color system — keep to these roles, no ad-hoc hues:
+ * - brand-500/600 : primary accents + agent identity (soft sage)
+ * - emerald       : ok / valid
+ * - amber         : warning (non-blocking)
+ * - red           : avoided — replaced by severe plum below
+ * - severe plum   : blocking / danger (soft, matches sage + stone)
+ * - stone         : neutral surfaces, text, selection states
+ */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01", "tnum" 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: var(--color-brand-100);
+}
+
+/* slim scrollbars for table + chat */
+.slim-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.slim-scroll::-webkit-scrollbar-thumb {
+  background: #b9c9ba;
+  border-radius: 8px;
+}
+.slim-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* chat entrance */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.msg-in {
+  animation: rise 180ms ease-out;
+}
+
+/* entrance */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-enter {
+  opacity: 0;
+  animation: fade-up 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* faint technical dot grid for hero surfaces */
+.bg-dots {
+  background-image: radial-gradient(circle, rgba(82, 113, 84, 0.22) 1px, transparent 1.4px);
+  background-size: 20px 20px;
+}
