@@ -40,6 +40,8 @@ yarn-error.log*
 .env*
 agent/.env
 agent/.env*
+!.env*.example
+!agent/.env.example
 *.log
 
 # vercel

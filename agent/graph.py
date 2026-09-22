@@ -67,12 +67,15 @@ def _build_model() -> Any:
     provider = os.getenv("LLM_PROVIDER", "gemini").lower()
     if provider == "openai":
         from langchain_openai import ChatOpenAI
-
-        return ChatOpenAI(model=os.getenv("MODEL") or "gpt-4o", temperature=0)
+        api_key = (os.getenv("OPENAI_API_KEY") or "").strip().strip("\"'")
+        return ChatOpenAI(model=os.getenv("MODEL") or "gpt-4o", api_key=api_key, temperature=0)
     from langchain_google_genai import ChatGoogleGenerativeAI
 
+    api_key = (os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY") or "").strip().strip("\"'")
     return ChatGoogleGenerativeAI(
-        model=os.getenv("MODEL") or "gemini-2.5-flash", temperature=0
+        model=os.getenv("MODEL") or "gemini-2.5-flash",
+        google_api_key=api_key,
+        temperature=0,
     )
 
 
