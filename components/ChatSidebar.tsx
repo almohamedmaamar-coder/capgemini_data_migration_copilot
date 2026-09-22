@@ -81,7 +81,7 @@ export default function ChatSidebar() {
     // R1 Tasks grouped by column
     const r1ByCol: Record<string, number> = {};
     r1Issues.forEach((i) => {
-      const col = i.column || i.field || "Champ requis";
+      const col = i.field || "Champ requis";
       r1ByCol[col] = (r1ByCol[col] || 0) + 1;
     });
 
@@ -146,7 +146,7 @@ export default function ChatSidebar() {
     const r1Issues = report.issues.filter((i) => i.rule === "R1");
     const colCounts: Record<string, number> = {};
     r1Issues.forEach((i) => {
-      const col = i.column || i.field || "";
+      const col = i.field || "";
       if (col) colCounts[col] = (colCounts[col] || 0) + 1;
     });
     const sortedCols = Object.entries(colCounts).sort((a, b) => b[1] - a[1]);
@@ -161,7 +161,7 @@ export default function ChatSidebar() {
     // 2. Duplicate key
     const r3Issues = report.issues.filter((i) => i.rule === "R3");
     if (r3Issues.length > 0) {
-      const sampleVal = r3Issues[0].value || "clé";
+      const sampleVal = r3Issues[0].field || "clé";
       chips.push({
         label: `Doublon « ${sampleVal} »`,
         prompt: `Explique pourquoi la clé « ${sampleVal} » est en doublon et quelle est la règle d'unicité SAP pour cette entité.`,
